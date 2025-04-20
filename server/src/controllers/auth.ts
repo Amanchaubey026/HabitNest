@@ -93,6 +93,24 @@ export const getMe = async (
   }
 };
 
+// @desc    Logout user
+// @route   GET /api/auth/logout
+// @access  Private
+export const logout = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    res.status(200).json({
+      success: true,
+      message: 'Logged out successfully'
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Get token from model, create cookie and send response
 const sendTokenResponse = (user: IUser, statusCode: number, res: Response) => {
   // Create token

@@ -42,4 +42,13 @@ export const login = async (userData: LoginFormData): Promise<AuthResponse> => {
 export const getCurrentUser = async (): Promise<User> => {
   const response = await api.get<ApiResponse<User>>('/auth/me');
   return response.data.data;
+};
+
+// Logout user
+export const logout = async (): Promise<{success: boolean, message: string}> => {
+  const response = await api.get<ApiResponse<{message: string}>>('/auth/logout');
+  return {
+    success: response.data.success,
+    message: response.data.data.message
+  };
 }; 

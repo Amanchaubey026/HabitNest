@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { AuthState, LoginFormData, RegisterFormData, User } from '../types';
 import * as authService from '../services/auth';
+import toast from 'react-hot-toast';
 
 // Auth context initial state
 const initialState: AuthState = {
@@ -107,17 +108,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (formData: LoginFormData) => {
     try {
       const data = await authService.login(formData);
-      console.log('Login data received:', data);
       if (data && typeof data === 'object' && 'token' in data && typeof data.token === 'string') {
         dispatch({ type: 'LOGIN_SUCCESS', payload: data });
+        toast.success('Logged in successfully!', {
+          position: 'top-center'
+        });
       } else {
         console.error('Invalid response data structure:', data);
+        toast.error('Login failed', {
+          position: 'top-center'
+        });
         throw new Error('Invalid response from server');
       }
     } catch (error: any) {
       console.error('Login error:', error);
       const errorMessage = error.response?.data?.error || error.message || 'Login failed';
       dispatch({ type: 'LOGIN_FAIL', payload: errorMessage });
+      toast.error(errorMessage, {
+        position: 'top-center'
+      });
       throw new Error(errorMessage);
     }
   };
@@ -129,21 +138,42 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.log('Register data received:', data);
       if (data && typeof data === 'object' && 'token' in data && typeof data.token === 'string') {
         dispatch({ type: 'REGISTER_SUCCESS', payload: data });
+        toast.success('Registered successfully!', {
+          position: 'top-center'
+        });
       } else {
         console.error('Invalid response data structure:', data);
+        toast.error('Registration failed', {
+          position: 'top-center'
+        });
         throw new Error('Invalid response from server');
       }
     } catch (error: any) {
       console.error('Register error:', error);
       const errorMessage = error.response?.data?.error || error.message || 'Registration failed';
       dispatch({ type: 'REGISTER_FAIL', payload: errorMessage });
+      toast.error(errorMessage, {
+        position: 'top-center'
+      });
       throw new Error(errorMessage);
     }
   };
 
   // Logout user
-  const logout = () => {
-    dispatch({ type: 'LOGOUT' });
+  const logout = async () => {
+    try {
+      await authService.logout();
+      dispatch({ type: 'LOGOUT' });
+      toast.success('Logged out successfully!', {
+        position: 'top-center'
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+      dispatch({ type: 'LOGOUT' });
+      toast.success('Logged out successfully!', {
+        position: 'top-center'
+      });
+    }
   };
 
   // Clear error
