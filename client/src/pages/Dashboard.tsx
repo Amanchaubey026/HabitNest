@@ -15,7 +15,11 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+    
     const fetchData = async () => {
+      if (!authState.isAuthenticated) return;
+      
       try {
         // Get today's date for schedule
         const today = new Date();
@@ -30,14 +34,19 @@ const Dashboard: React.FC = () => {
           getScheduleEntries(todayString)
         ]);
         
-        setLoading(false);
+        if (isMounted) setLoading(false);
       } catch (error) {
-        setLoading(false);
+        console.error('Error fetching dashboard data:', error);
+        if (isMounted) setLoading(false);
       }
     };
 
     fetchData();
-  }, [getGoals, getScheduleEntries]);
+    
+    return () => {
+      isMounted = false;
+    };
+  }, [getGoals, getScheduleEntries, authState.isAuthenticated]);
 
   if (loading) {
     return <Spinner className="mt-16" />;

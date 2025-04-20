@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useCallback } from 'react';
 import { ScheduleEntry, ScheduleState, ScheduleFormData } from '../types';
 import * as scheduleService from '../services/schedule';
 
@@ -105,7 +105,7 @@ export const ScheduleProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [state, dispatch] = useReducer(scheduleReducer, initialState);
 
   // Get all schedule entries
-  const getScheduleEntries = async (date?: string) => {
+  const getScheduleEntries = useCallback(async (date?: string) => {
     dispatch({ type: 'SET_LOADING' });
     try {
       const entries = await scheduleService.getScheduleEntries(date);
@@ -114,10 +114,10 @@ export const ScheduleProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       const errorMessage = error.response?.data?.error || 'Error fetching schedule entries';
       dispatch({ type: 'SCHEDULE_ERROR', payload: errorMessage });
     }
-  };
+  }, []);
 
   // Get a single schedule entry
-  const getScheduleEntry = async (id: string) => {
+  const getScheduleEntry = useCallback(async (id: string) => {
     dispatch({ type: 'SET_LOADING' });
     try {
       const entry = await scheduleService.getScheduleEntry(id);
@@ -126,10 +126,10 @@ export const ScheduleProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       const errorMessage = error.response?.data?.error || 'Error fetching schedule entry';
       dispatch({ type: 'SCHEDULE_ERROR', payload: errorMessage });
     }
-  };
+  }, []);
 
   // Create a new schedule entry
-  const createScheduleEntry = async (entryData: ScheduleFormData) => {
+  const createScheduleEntry = useCallback(async (entryData: ScheduleFormData) => {
     dispatch({ type: 'SET_LOADING' });
     try {
       const entry = await scheduleService.createScheduleEntry(entryData);
@@ -139,10 +139,10 @@ export const ScheduleProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       dispatch({ type: 'SCHEDULE_ERROR', payload: errorMessage });
       throw new Error(errorMessage);
     }
-  };
+  }, []);
 
   // Update schedule entry
-  const updateScheduleEntry = async (id: string, entryData: Partial<ScheduleFormData>) => {
+  const updateScheduleEntry = useCallback(async (id: string, entryData: Partial<ScheduleFormData>) => {
     dispatch({ type: 'SET_LOADING' });
     try {
       const entry = await scheduleService.updateScheduleEntry(id, entryData);
@@ -152,10 +152,10 @@ export const ScheduleProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       dispatch({ type: 'SCHEDULE_ERROR', payload: errorMessage });
       throw new Error(errorMessage);
     }
-  };
+  }, []);
 
   // Delete schedule entry
-  const deleteScheduleEntry = async (id: string) => {
+  const deleteScheduleEntry = useCallback(async (id: string) => {
     dispatch({ type: 'SET_LOADING' });
     try {
       await scheduleService.deleteScheduleEntry(id);
@@ -164,17 +164,17 @@ export const ScheduleProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       const errorMessage = error.response?.data?.error || 'Error deleting schedule entry';
       dispatch({ type: 'SCHEDULE_ERROR', payload: errorMessage });
     }
-  };
+  }, []);
 
   // Clear schedule
-  const clearSchedule = () => {
+  const clearSchedule = useCallback(() => {
     dispatch({ type: 'CLEAR_SCHEDULE' });
-  };
+  }, []);
 
   // Clear error
-  const clearError = () => {
+  const clearError = useCallback(() => {
     dispatch({ type: 'CLEAR_ERROR' });
-  };
+  }, []);
 
   return (
     <ScheduleContext.Provider value={{

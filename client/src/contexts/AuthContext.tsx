@@ -4,7 +4,7 @@ import * as authService from '../services/auth';
 
 // Auth context initial state
 const initialState: AuthState = {
-  token: localStorage.getItem('token'),
+  token: typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null,
   isAuthenticated: false,
   loading: true,
   user: null,
@@ -39,19 +39,26 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
       };
     case 'LOGIN_SUCCESS':
     case 'REGISTER_SUCCESS':
-      localStorage.setItem('token', action.payload.token);
-      return {
-        ...state,
-        token: action.payload.token,
-        isAuthenticated: true,
-        loading: false,
-        error: null
-      };
+      if (action.payload && typeof action.payload.token === 'string') {
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem('token', action.payload.token);
+        }
+        return {
+          ...state,
+          token: action.payload.token,
+          isAuthenticated: true,
+          loading: false,
+          error: null
+        };
+      }
+      return state;
     case 'AUTH_ERROR':
     case 'LOGIN_FAIL':
     case 'REGISTER_FAIL':
     case 'LOGOUT':
-      localStorage.removeItem('token');
+      if (typeof localStorage !== 'undefined') {
+        localStorage.removeItem('token');
+      }
       return {
         ...state,
         token: null,
@@ -88,6 +95,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           dispatch({ type: 'AUTH_ERROR' });
         }
       } catch (error) {
+        console.error('Error loading user:', error);
         dispatch({ type: 'AUTH_ERROR' });
       }
     };
@@ -99,9 +107,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (formData: LoginFormData) => {
     try {
       const data = await authService.login(formData);
-      dispatch({ type: 'LOGIN_SUCCESS', payload: data });
+      console.log('Login data received:', data);
+      if (data && typeof data === 'object' && 'token' in data && typeof data.token === 'string') {
+        dispatch({ type: 'LOGIN_SUCCESS', payload: data });
+      } else {
+        console.error('Invalid response data structure:', data);
+        throw new Error('Invalid response from server');
+      }
     } catch (error: any) {
-      const errorMessage = error.response?.data?.error || 'Login failed';
+      console.error('Login error:', error);
+      const errorMessage = error.response?.data?.error || error.message || 'Login failed';
       dispatch({ type: 'LOGIN_FAIL', payload: errorMessage });
       throw new Error(errorMessage);
     }
@@ -111,9 +126,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = async (formData: RegisterFormData) => {
     try {
       const data = await authService.register(formData);
-      dispatch({ type: 'REGISTER_SUCCESS', payload: data });
+      console.log('Register data received:', data);
+      if (data && typeof data === 'object' && 'token' in data && typeof data.token === 'string') {
+        dispatch({ type: 'REGISTER_SUCCESS', payload: data });
+      } else {
+        console.error('Invalid response data structure:', data);
+        throw new Error('Invalid response from server');
+      }
     } catch (error: any) {
-      const errorMessage = error.response?.data?.error || 'Registration failed';
+      console.error('Register error:', error);
+      const errorMessage = error.response?.data?.error || error.message || 'Registration failed';
       dispatch({ type: 'REGISTER_FAIL', payload: errorMessage });
       throw new Error(errorMessage);
     }

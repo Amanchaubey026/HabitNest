@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useCallback } from 'react';
 import { Goal, GoalState, GoalFormData } from '../types';
 import * as goalService from '../services/goals';
 
@@ -105,7 +105,7 @@ export const GoalProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [state, dispatch] = useReducer(goalReducer, initialState);
 
   // Get all goals
-  const getGoals = async (month?: number, year?: number) => {
+  const getGoals = useCallback(async (month?: number, year?: number) => {
     dispatch({ type: 'SET_LOADING' });
     try {
       const goals = await goalService.getGoals(month, year);
@@ -114,10 +114,10 @@ export const GoalProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const errorMessage = error.response?.data?.error || 'Error fetching goals';
       dispatch({ type: 'GOAL_ERROR', payload: errorMessage });
     }
-  };
+  }, []);
 
   // Get a single goal
-  const getGoal = async (id: string) => {
+  const getGoal = useCallback(async (id: string) => {
     dispatch({ type: 'SET_LOADING' });
     try {
       const goal = await goalService.getGoal(id);
@@ -126,10 +126,10 @@ export const GoalProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const errorMessage = error.response?.data?.error || 'Error fetching goal';
       dispatch({ type: 'GOAL_ERROR', payload: errorMessage });
     }
-  };
+  }, []);
 
   // Create a new goal
-  const createGoal = async (goalData: GoalFormData) => {
+  const createGoal = useCallback(async (goalData: GoalFormData) => {
     dispatch({ type: 'SET_LOADING' });
     try {
       const goal = await goalService.createGoal(goalData);
@@ -139,10 +139,10 @@ export const GoalProvider: React.FC<{ children: React.ReactNode }> = ({ children
       dispatch({ type: 'GOAL_ERROR', payload: errorMessage });
       throw new Error(errorMessage);
     }
-  };
+  }, []);
 
   // Update goal
-  const updateGoal = async (id: string, goalData: Partial<GoalFormData>) => {
+  const updateGoal = useCallback(async (id: string, goalData: Partial<GoalFormData>) => {
     dispatch({ type: 'SET_LOADING' });
     try {
       const goal = await goalService.updateGoal(id, goalData);
@@ -152,10 +152,10 @@ export const GoalProvider: React.FC<{ children: React.ReactNode }> = ({ children
       dispatch({ type: 'GOAL_ERROR', payload: errorMessage });
       throw new Error(errorMessage);
     }
-  };
+  }, []);
 
   // Delete goal
-  const deleteGoal = async (id: string) => {
+  const deleteGoal = useCallback(async (id: string) => {
     dispatch({ type: 'SET_LOADING' });
     try {
       await goalService.deleteGoal(id);
@@ -164,17 +164,17 @@ export const GoalProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const errorMessage = error.response?.data?.error || 'Error deleting goal';
       dispatch({ type: 'GOAL_ERROR', payload: errorMessage });
     }
-  };
+  }, []);
 
   // Clear goals
-  const clearGoals = () => {
+  const clearGoals = useCallback(() => {
     dispatch({ type: 'CLEAR_GOALS' });
-  };
+  }, []);
 
   // Clear error
-  const clearError = () => {
+  const clearError = useCallback(() => {
     dispatch({ type: 'CLEAR_ERROR' });
-  };
+  }, []);
 
   return (
     <GoalContext.Provider value={{
