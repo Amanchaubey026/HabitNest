@@ -25,10 +25,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "favicon": "pwa-asset-generator ./public/favicon.svg ./public/icons --icon-only --favicon --opaque false"
+    "favicon": "pwa-asset-generator ./public/favicon.svg ./public/icons --icon-only --favicon --opaque false",
+    "postinstall": "test \"$NODE_ENV\" = production && exit 0 || npm dedupe && echo 'Development dependencies installed'"
   },
   "eslintConfig": {
     "extends": [

@@ -1,0 +1,9 @@
+{
+  "buildCommand": "cd client && npm install --production=false && npm run build",
+  "outputDirectory": "client/build",
+  "installCommand": "npm install --no-package-lock",
+  "env": {
+    "SKIP_PREFLIGHT_CHECK": "true",
+    "NODE_ENV": "production"
+  }
+} 
