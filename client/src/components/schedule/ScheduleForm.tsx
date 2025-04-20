@@ -28,7 +28,7 @@ const ScheduleForm: React.FC<ScheduleFormProps> = ({
 
   useEffect(() => {
     if (initialData) {
-      // Format date for the input
+      // Format date for the inputs
       const date = new Date(initialData.date).toISOString().split('T')[0];
       
       setFormData({
