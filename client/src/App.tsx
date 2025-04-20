@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Goals from './pages/Goals';
 import Schedule from './pages/Schedule';
+import HomePage from './pages/HomePage';
 import Layout from './components/layout/Layout';
 import PrivateRoute from './components/layout/PrivateRoute';
 import { AuthProvider } from './contexts/AuthContext';
@@ -36,6 +37,7 @@ const App: React.FC = () => {
                 <Routes>
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
+                  <Route path="/" element={<HomePage />} />
                   
                   <Route element={<PrivateRoute />}>
                     <Route path="/dashboard" element={<Dashboard />} />
@@ -43,8 +45,7 @@ const App: React.FC = () => {
                     <Route path="/schedule" element={<Schedule />} />
                   </Route>
                   
-                  <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                  <Route path="*" element={<Navigate to="/dashboard" replace />} />
+                  <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               </Layout>
             </ScheduleProvider>
