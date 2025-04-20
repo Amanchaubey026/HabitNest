@@ -74,7 +74,13 @@ The project is organized into two main directories:
    npm install
    ```
 
-3. Start the development server:
+3. Set up environment variables:
+   - Copy `.env.example` to `.env.development` for local development
+   - The environment variables control the API URL and development mode:
+     - `REACT_APP_API_URL`: URL of the backend API
+     - `REACT_APP_DEVELOPMENT`: Set to 'true' for local development, omit for production
+
+4. Start the development server:
    ```
    npm start
    ```
@@ -117,13 +123,15 @@ The frontend React application can be deployed on Render, Vercel, Netlify, or an
    npm run build
    ```
 
-2. **Deploy the built files**:
+2. **Environment Configuration**:
+   - For Render, set the following environment variables in the dashboard:
+     - `REACT_APP_API_URL`: URL of your deployed backend (e.g., `https://habitnest-hknx.onrender.com`)
+     - Do NOT set `REACT_APP_DEVELOPMENT` in production
+   - The application will automatically use the production API URL when `REACT_APP_DEVELOPMENT` is not present
+
+3. **Deploy the built files**:
    - Upload the contents of the `client/build` directory to your hosting provider
    - For Render, create a Static Site service and point it to your repository
-
-3. **Environment Configuration**:
-   - Make sure the frontend is configured to connect to your deployed backend API
-   - Update any environment variables or configuration files as needed
 
 ## Building for Production
 
