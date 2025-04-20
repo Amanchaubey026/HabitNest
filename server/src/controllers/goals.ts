@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { validationResult } from 'express-validator';
+// Using require for express-validator
+const { validationResult } = require('express-validator');
 import Goal, { IGoal } from '../models/Goal';
 
 // @desc    Get all goals for a user

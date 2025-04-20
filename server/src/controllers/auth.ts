@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { validationResult } from 'express-validator';
+// Using require for express-validator 
+const { validationResult } = require('express-validator');
 import User, { IUser } from '../models/User';
 
 // @desc    Register user

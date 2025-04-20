@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { validationResult } from 'express-validator';
+// Using require for express-validator
+const { validationResult } = require('express-validator');
 import Schedule, { ISchedule } from '../models/Schedule';
 
 // @desc    Get all schedule entries for a user for a specific date
@@ -107,7 +108,7 @@ export const createScheduleEntry = async (
     const newStartTime = convertTimeToMinutes(startTime);
     const newEndTime = convertTimeToMinutes(endTime);
     
-    const hasConflict = existingEntries.some(entry => {
+    const hasConflict = existingEntries.some((entry: ISchedule) => {
       const entryStartTime = convertTimeToMinutes(entry.startTime);
       const entryEndTime = convertTimeToMinutes(entry.endTime);
       
@@ -191,7 +192,7 @@ export const updateScheduleEntry = async (
       const newStartTime = convertTimeToMinutes(startTime);
       const newEndTime = convertTimeToMinutes(endTime);
       
-      const hasConflict = existingEntries.some(entry => {
+      const hasConflict = existingEntries.some((entry: ISchedule) => {
         const entryStartTime = convertTimeToMinutes(entry.startTime);
         const entryEndTime = convertTimeToMinutes(entry.endTime);
         

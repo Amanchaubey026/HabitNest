@@ -1,5 +1,6 @@
 import express from 'express';
-import { check } from 'express-validator';
+// Using require for express-validator
+const { check } = require('express-validator');
 import {
   getScheduleEntries,
   getScheduleEntry,

@@ -1,5 +1,6 @@
 import express from 'express';
-import { check } from 'express-validator';
+// Using require for express-validator
+const { check } = require('express-validator');
 import { register, login, getMe, logout } from '../controllers/auth';
 import { protect } from '../middleware/auth';
 
