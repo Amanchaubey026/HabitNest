@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useCallback, ReactNode, useEffect } from 'react';
+import api from '../services/api';
 
 // Message type definition
 type MessageType = {
@@ -147,30 +148,17 @@ export const ChatbotProvider: React.FC<{ children: ReactNode }> = ({ children })
     setIsLoading(true);
     
     try {
-      // Placeholder for API call - will be implemented in services layer
-      const response = await fetch('/api/chatbot', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          message: content,
-          history: messages.slice(-10), // Send last 10 messages for context
-          contextInfo // Send any additional context
-        }),
-        signal: AbortSignal.timeout(30000), // 30 second timeout
+      // Use the API service with appropriate base URL configuration
+      const response = await api.post('/chatbot', { 
+        message: content,
+        history: messages.slice(-10), // Send last 10 messages for context
+        contextInfo // Send any additional context
       });
-      
-      if (!response.ok) {
-        throw new Error(`Server responded with ${response.status}: ${response.statusText}`);
-      }
-      
-      const data = await response.json();
       
       // Add assistant response
       const assistantMessage: MessageType = {
         id: generateId(),
-        content: data.response,
+        content: response.data.response,
         role: 'assistant',
         timestamp: new Date()
       };

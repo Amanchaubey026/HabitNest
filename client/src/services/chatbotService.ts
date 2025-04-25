@@ -1,4 +1,5 @@
 import axios from 'axios';
+import api from './api';
 
 // Message interface
 interface ChatMessage {
@@ -45,11 +46,10 @@ export const createChatCompletion = async (
       messagesToSend.push(contextMessage);
     }
     
-    // The API key would normally be handled securely on the server side
-    // This is a client-side implementation for demonstration purposes only
-    const response = await axios({
+    // Use API instance that handles the correct base URL in production
+    const response = await api({
       method: 'post',
-      url: '/api/chatbot/chat',
+      url: '/chatbot/chat',
       data: {
         messages: messagesToSend,
       },
@@ -151,6 +151,8 @@ I can help you build better habits and achieve your goals through science-backed
 };
 
 // Advanced mock function with markdown responses and typing effect
+// Note: This mock function is only used for development
+// In production, real API calls will be made using the createChatCompletion function
 export const mockChatCompletion = async (
   messages: ChatMessage[],
   onChunk: (chunk: string) => void,
