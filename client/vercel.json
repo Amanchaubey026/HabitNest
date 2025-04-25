@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "installCommand": "npm install",
+  "env": {
+    "REACT_APP_DEVELOPMENT": "false",
+    "REACT_APP_API_URL": "https://habitnest-hknx.onrender.com",
+    "SKIP_PREFLIGHT_CHECK": "true",
+    "NODE_ENV": "production"
+  }
+} 

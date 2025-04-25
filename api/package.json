@@ -1,7 +1,0 @@
-{
-  "name": "habitnest-api-proxy",
-  "version": "1.0.0",
-  "description": "API proxy for HabitNest application",
-  "main": "index.js",
-  "dependencies": {}
-} 
