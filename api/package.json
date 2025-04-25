@@ -3,7 +3,5 @@
   "version": "1.0.0",
   "description": "API proxy for HabitNest application",
   "main": "index.js",
-  "dependencies": {
-    "http-proxy-middleware": "^2.0.6"
-  }
+  "dependencies": {}
 } 
