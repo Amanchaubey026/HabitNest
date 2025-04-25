@@ -1,0 +1,55 @@
+/* Chatbot positioning fixes */
+
+/* Fix for the chatbot being hidden at 100% screen size */
+.chatbot-container {
+  position: fixed !important;
+  z-index: 9999 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure the toggle button is always visible */
+.chatbot-toggle {
+  position: fixed !important;
+  z-index: 9999 !important;
+  visibility: visible !important;
+}
+
+/* Adjust positioning for various screen sizes */
+@media (min-width: 1400px) {
+  .chatbot-container {
+    right: 24px !important;
+    bottom: 80px !important;
+  }
+  
+  .chatbot-toggle {
+    right: 24px !important;
+    bottom: 24px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1399px) {
+  .chatbot-container {
+    right: 20px !important;
+    bottom: 80px !important;
+  }
+}
+
+/* Ensure it doesn't get too big on small screens */
+@media (max-height: 800px) {
+  .chatbot-container {
+    max-height: 80vh !important;
+  }
+}
+
+/* Fix for mobile devices */
+@media (max-width: 767px) {
+  .chatbot-container {
+    height: 85vh !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+} 

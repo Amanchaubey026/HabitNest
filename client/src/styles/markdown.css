@@ -1,0 +1,331 @@
+/* Extra small typography for mobile */
+.prose-xs h1 {
+  font-size: 1.1rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.375rem;
+}
+
+.prose-xs h2 {
+  font-size: 1rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.375rem;
+}
+
+.prose-xs h3 {
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.375rem;
+}
+
+.prose-xs p {
+  margin-top: 0.375rem;
+  margin-bottom: 0.375rem;
+  font-size: 0.8rem;
+}
+
+.prose-xs ul,
+.prose-xs ol {
+  margin-top: 0.375rem;
+  margin-bottom: 0.375rem;
+  padding-left: 1.25rem;
+}
+
+.prose-xs li {
+  margin-top: 0.125rem;
+  margin-bottom: 0.125rem;
+  font-size: 0.8rem;
+}
+
+.prose-xs blockquote {
+  font-size: 0.8rem;
+  padding-left: 0.75rem;
+  margin: 0.375rem 0;
+  border-left-width: 2px;
+}
+
+.prose-xs code {
+  font-size: 0.75rem;
+  padding: 0.1em 0.2em;
+}
+
+.prose-xs pre {
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.prose-xs img {
+  margin: 0.375rem 0;
+}
+
+/* Markdown content styling */
+.markdown-content {
+  width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Headings */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.markdown-content h1 {
+  font-size: 1.25rem;
+}
+
+.markdown-content h2 {
+  font-size: 1.15rem;
+}
+
+.markdown-content h3 {
+  font-size: 1.05rem;
+}
+
+/* Paragraphs */
+.markdown-content p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Lists */
+.markdown-content ul,
+.markdown-content ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.markdown-content li {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.markdown-content ul {
+  list-style-type: disc;
+}
+
+.markdown-content ol {
+  list-style-type: decimal;
+}
+
+/* Blockquotes */
+.markdown-content blockquote {
+  border-left: 3px solid #6366f1;
+  padding-left: 1rem;
+  margin-left: 0;
+  margin-right: 0;
+  font-style: italic;
+  color: #4b5563;
+}
+
+.dark .markdown-content blockquote {
+  color: #9ca3af;
+}
+
+/* Code blocks */
+.markdown-content pre {
+  background-color: #f3f4f6;
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+
+.dark .markdown-content pre {
+  background-color: #1e293b;
+}
+
+.markdown-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875em;
+  background-color: rgba(99, 102, 241, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+}
+
+.dark .markdown-content code {
+  background-color: rgba(99, 102, 241, 0.2);
+}
+
+.markdown-content pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Links */
+.markdown-content a {
+  color: #6366f1;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.markdown-content a:hover {
+  color: #4f46e5;
+}
+
+.dark .markdown-content a {
+  color: #a5b4fc;
+}
+
+.dark .markdown-content a:hover {
+  color: #c7d2fe;
+}
+
+/* Tables */
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.dark .markdown-content th,
+.dark .markdown-content td {
+  border-color: #374151;
+}
+
+.markdown-content th {
+  background-color: #f9fafb;
+  font-weight: 600;
+}
+
+.dark .markdown-content th {
+  background-color: #1f2937;
+}
+
+/* Horizontal rule */
+.markdown-content hr {
+  border: 0;
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 1.5rem 0;
+}
+
+.dark .markdown-content hr {
+  background-color: #374151;
+}
+
+/* Bold and italic */
+.markdown-content strong {
+  font-weight: 600;
+}
+
+.markdown-content em {
+  font-style: italic;
+}
+
+/* Images */
+.markdown-content img {
+  max-width: 100%;
+  border-radius: 0.375rem;
+}
+
+/* Fix emoji size */
+.markdown-content img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+}
+
+/* Special emojis in headings */
+.markdown-content h1 .emoji,
+.markdown-content h2 .emoji,
+.markdown-content h3 .emoji {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+/* Custom classes for emphasis */
+.markdown-content .highlight {
+  background-color: rgba(250, 204, 21, 0.2);
+  padding: 0.1em 0.3em;
+  border-radius: 0.25rem;
+}
+
+.markdown-content .success {
+  color: #10b981;
+}
+
+.markdown-content .warning {
+  color: #f59e0b;
+}
+
+.markdown-content .error {
+  color: #ef4444;
+}
+
+/* Grid pattern backgrounds */
+.bg-grid-pattern-light {
+  background-size: 20px 20px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+
+.bg-grid-pattern-dark {
+  background-size: 20px 20px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .markdown-content h1 {
+    font-size: 1.1rem;
+  }
+  
+  .markdown-content h2 {
+    font-size: 1rem;
+  }
+  
+  .markdown-content h3 {
+    font-size: 0.9rem;
+  }
+  
+  .markdown-content p,
+  .markdown-content li {
+    font-size: 0.85rem;
+  }
+  
+  .markdown-content pre,
+  .markdown-content blockquote {
+    margin: 0.5rem 0;
+  }
+  
+  .markdown-content code {
+    font-size: 0.75em;
+  }
+}
+
+/* Chatbot visibility fix for larger screens */
+@media (min-width: 1200px) {
+  .fixed.bottom-0.right-0.md\:bottom-20.md\:right-6 {
+    bottom: 20px !important;
+    right: 24px !important;
+  }
+}
+
+/* Ensure chatbot doesn't overflow on various screen sizes */
+@media (max-height: 700px) {
+  .max-h-\[90vh\] {
+    max-height: 85vh !important;
+  }
+} 

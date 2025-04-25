@@ -8,6 +8,7 @@ import errorHandler from './middleware/error';
 import authRoutes from './routes/auth';
 import goalRoutes from './routes/goals';
 import scheduleRoutes from './routes/schedule';
+import chatbotRoutes from './routes/chatbot';
 
 // Load env vars
 dotenv.config();
@@ -35,6 +36,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/goals', goalRoutes);
 app.use('/api/schedule', scheduleRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 // Health check endpoint for Render
 app.get('/health', (req, res) => {

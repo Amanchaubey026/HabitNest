@@ -13,6 +13,8 @@ import { AuthProvider } from './contexts/AuthContext';
 import { GoalProvider } from './contexts/GoalContext';
 import { ScheduleProvider } from './contexts/ScheduleContext';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { ChatbotProvider } from './contexts/ChatbotContext';
+import Chatbot from './components/chatbot/Chatbot';
 
 const App: React.FC = () => {
   return (
@@ -33,21 +35,24 @@ const App: React.FC = () => {
         <AuthProvider>
           <GoalProvider>
             <ScheduleProvider>
-              <Layout>
-                <Routes>
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/" element={<HomePage />} />
-                  
-                  <Route element={<PrivateRoute />}>
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/goals" element={<Goals />} />
-                    <Route path="/schedule" element={<Schedule />} />
-                  </Route>
-                  
-                  <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
-              </Layout>
+              <ChatbotProvider>
+                <Layout>
+                  <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/" element={<HomePage />} />
+                    
+                    <Route element={<PrivateRoute />}>
+                      <Route path="/dashboard" element={<Dashboard />} />
+                      <Route path="/goals" element={<Goals />} />
+                      <Route path="/schedule" element={<Schedule />} />
+                    </Route>
+                    
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                  </Routes>
+                  <Chatbot />
+                </Layout>
+              </ChatbotProvider>
             </ScheduleProvider>
           </GoalProvider>
         </AuthProvider>
