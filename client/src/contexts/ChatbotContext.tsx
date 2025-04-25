@@ -158,7 +158,7 @@ export const ChatbotProvider: React.FC<{ children: ReactNode }> = ({ children })
           history: messages.slice(-10), // Send last 10 messages for context
           contextInfo // Send any additional context
         }),
-        signal: AbortSignal.timeout(30000), // 30 second timeout
+        signal: AbortSignal.timeout(30000), // 30 second timeoutt
       });
       
       if (!response.ok) {
